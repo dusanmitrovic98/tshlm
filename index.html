@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Since Set Date</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #setDate {
+            width: 200px;
+            padding: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        #timeDetails {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>❤️ Time since my hun's last message ❤️</h1>
+
+    <label for="setDate">Last message sent at:</label>
+    <input type="datetime-local" id="setDate" value="2023-11-18T05:46" onchange="updateTimeSinceSetDate()">
+
+    <div id="timer"></div>
+
+    <div id="timeDetails">
+        <p id="fullDays"></p>
+        <p id="fullHours"></p>
+        <p id="fullMinutes"></p>
+        <p id="fullSeconds"></p>
+    </div>
+
+    <script>
+        function updateTimeSinceSetDate() {
+            // Get the selected date and time
+            const setDateInput = document.getElementById('setDate');
+            const setDate = new Date(setDateInput.value);
+
+            // Calculate the time difference
+            const currentTime = new Date();
+            const timeDifference = currentTime - setDate;
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Display the time difference
+            const timerElement = document.getElementById('timer');
+            timerElement.innerHTML = `Hunny please be safe ❤️: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+            // Display the exact full number of days, hours, minutes, and seconds
+            const fullDaysElement = document.getElementById('fullDays');
+            fullDaysElement.innerHTML = `days: ${timeDifference / (1000 * 60 * 60 * 24)}`;
+
+            const fullHoursElement = document.getElementById('fullHours');
+            fullHoursElement.innerHTML = `hours: ${timeDifference / (1000 * 60 * 60)}`;
+
+            const fullMinutesElement = document.getElementById('fullMinutes');
+            fullMinutesElement.innerHTML = `minutes: ${timeDifference / (1000 * 60)}`;
+
+            const fullSecondsElement = document.getElementById('fullSeconds');
+            fullSecondsElement.innerHTML = `seconds: ${timeDifference / 1000}`;
+        }
+
+        // Call the function on page load to show the time difference for the default date
+        updateTimeSinceSetDate();
+    </script>
+
+</body>
+
+</html>
